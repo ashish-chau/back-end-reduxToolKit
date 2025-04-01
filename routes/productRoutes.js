@@ -9,11 +9,15 @@ router.get('/api/products', (req, res) => {
   connection.query(query, (err, results) => {
     if (err) {
       console.error('❌ Error fetching data from MySQL:', err.message);
-      return res.status(500).json({ error: 'Failed to fetch data from MySQL' });
+      return res.status(500).json({ status: "ERROR", message: "Failed to fetch data from MySQL" });
     }
 
-    // Send the fetched data as the API response
-    res.status(200).json(results);
+    // Customize the success response
+    res.status(200).json({
+      status: "SUCCESS",
+      message: `Here you go! You've received ${results.length} products. If you need more, just ask for it.`,
+      products: results
+    });
   });
 });
 
