@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const bodyParser = require("body-parser");
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
+const userLoginRoutes = require('./routes/userLoginRoute');
 const errorHandler = require('./middelware/errorHandler');
 
 dotenv.config();
@@ -16,6 +17,8 @@ app.use(cors()); // Enable CORS
 app.use(express.json()); // Parse JSON request bodies
 app.use('/api', productRoutes); // Use product routes
 app.use("/api", userRoutes);
+app.use("/api/users", userLoginRoutes); // Use User Routes
+
 // Global error handler middleware
 app.use(errorHandler);
 
